@@ -8,6 +8,7 @@
 					placeholder="Enter username"
 					name="username"
 					id="username"
+					required
 					v-model="form.username"
 			/>
 			<input
@@ -16,31 +17,44 @@
 					placeholder="Enter password"
 					name="password"
 					id="password"
+					required
 					v-model="form.password"
 			/>
-<!--			<input-->
-<!--					v-model="form.remember"-->
-<!--					class=""-->
-<!--					type="checkbox"/>-->
-<!--			<span>Keep me signed in</span>-->
-			<button class="button" type="submit">SIGN IN</button>
+			<!--			<input-->
+			<!--					v-model="form.remember"-->
+			<!--					class=""-->
+			<!--					type="checkbox"/>-->
+			<!--			<span>Keep me signed in</span>-->
+			<button class="button" type="submit" :disabled="submitting || !canSubmit">SIGN IN</button>
 		</form>
 	</div>
 </template>
 
 <script>
 	export default {
-		// eslint-disable-next-line vue/multi-word-component-names
 		name: "login",
 		data() {
 			return {
-				form: {}
+				form: {},
+				submitting: false
 			};
 		},
-		computed: {},
+		computed: {
+			canSubmit() {
+				return this.form.username
+						&& this.form.username !== ''
+						&& this.form.password
+						&& this.form.password !== ''
+			}
+		},
 		methods: {
 			login() {
-				this.$store.dispatch('login', this.form)
+				this.submitting = true
+				this.$store.dispatch('login', this.form).then(() => {
+					console.log('done')
+					this.submitting = false;
+					this.$router.push('/users')
+				})
 			}
 		}
 	};

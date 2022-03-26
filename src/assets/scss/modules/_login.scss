@@ -30,6 +30,13 @@
         
     }
     
+    button:disabled,
+    button[disabled]{
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+    }
+    
     &-heading {
         font-size: 20px;
         text-transform: uppercase;

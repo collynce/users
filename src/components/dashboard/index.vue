@@ -69,9 +69,9 @@
 				this.fetchingData = true
 				this.$store.dispatch('getUsers')
 						.then(() => {
-							setTimeout(()=>{
+							setTimeout(() => {
 								this.fetchingData = false
-							},3000)
+							}, 3000)
 						})
 						.catch(() => {
 
@@ -81,8 +81,10 @@
 				this.showModal = true;
 				this.selectedUser = user;
 			},
-			logout(){
-				this.$store.dispatch('logout')
+			logout() {
+				this.$store.dispatch('logout').then(() => {
+					this.$router.push({name: 'login'})
+				})
 			}
 		},
 		mounted() {
@@ -99,11 +101,11 @@
 				}
 			}
 
-			menuIcon.addEventListener('click', function() {
+			menuIcon.addEventListener('click', function () {
 				toggle(aside, 'active');
 			});
 
-			asideClose.addEventListener('click', function() {
+			asideClose.addEventListener('click', function () {
 				toggle(aside, 'active');
 			});
 		}

@@ -1,0 +1,71 @@
+.placeholder {
+    height: 115px;
+    border-radius: 10px;
+    
+    div {
+        background: #E8E8E8;
+    }
+    
+    .square {
+        width: 190px;
+        height: 270px;
+    }
+    
+    .pulse {
+        div {
+            animation: pulse 2s infinite ease-in-out;
+            -webkit-animation: pulse 2s infinite ease-in-out;
+        }
+    }
+}
+
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+    50% {
+        background-color: rgba(165, 165, 165, .3);
+    }
+    100% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+    50% {
+        background-color: rgba(165, 165, 165, .3);
+    }
+    100% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+}
+
+.placeholder.wave div {
+    animation: wave 2s infinite linear forwards;
+    -webkit-animation: wave 2s infinite linear forwards;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+}
+
+@keyframes wave {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+@-webkit-keyframes wave {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}

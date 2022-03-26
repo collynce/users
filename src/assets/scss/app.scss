@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+@import "modules/login";
+@import "modules/dashboard";
+@import "modules/modal";
+@import "modules/placeholder";

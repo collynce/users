@@ -51,9 +51,7 @@
 			login() {
 				this.submitting = true
 				this.$store.dispatch('login', this.form).then(() => {
-					console.log('done')
 					this.submitting = false;
-					this.$router.push('/users')
 				})
 			}
 		}

@@ -11,35 +11,43 @@ const routes = [
     path: "/",
     name: "home",
     component: dashboard,
-    meta: { requireAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: "/users",
     name: "dashboard",
     component: dashboard,
-    meta: { requireAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",
     name: "login",
     component: login,
-    meta: { requireAuth: false },
+    meta: { requiresGuest: true },
   },
 ];
 
 const router = new VueRouter({
-  mode: "history",
   routes,
 });
 
 router.beforeEach((to, from, next) => {
   let loggedIn = store.getters.loggedIn;
 
-  if (to.matched.some((record) => record.meta.requireAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!loggedIn) {
       next({
         path: "/login",
-        query: { redirect: to.fullPath },
+        query: { redirect: to.fullpath },
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some((record) => record.meta.requiresGuest)) {
+    if (loggedIn) {
+      next({
+        path: "/users",
+        query: { redirect: to.fullpath },
       });
     } else {
       next();

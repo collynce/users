@@ -14,7 +14,7 @@
 					<li class="aside_list-item">Settings</li>
 				</ul>
 
-				<div class="username" @click="logout">< Admin</div>
+				<div class="username" @click="logout">< {{user.username}}</div>
 			</aside>
 			<main class="main">
 				<h3>Users</h3>
@@ -62,6 +62,7 @@
 		computed: {
 			...mapGetters({
 				users: 'users',
+				user: 'user'
 			})
 		},
 		methods: {
@@ -82,9 +83,7 @@
 				this.selectedUser = user;
 			},
 			logout() {
-				this.$store.dispatch('logout').then(() => {
-					this.$router.push({name: 'login'})
-				})
+				this.$store.dispatch('logout')
 			}
 		},
 		mounted() {

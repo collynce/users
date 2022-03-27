@@ -2,9 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import router from "@/router";
 
 Vue.use(Vuex);
-let user = sessionStorage.getItem("user");
+let user = null;
+user = sessionStorage.getItem("user");
 
 export default new Vuex.Store({
 	state: {
@@ -26,14 +28,18 @@ export default new Vuex.Store({
 			state.users = payload;
 		},
 		set_loggedin_user(state, payload) {
-			state.user = payload.username;
+			state.user = payload;
+			state.loggedIn = true;
 			sessionStorage.setItem('user', JSON.stringify({
 				username: payload.username
 			}))
+			router.push({name:'dashboard'})
 		},
 		logout(state) {
-			state.user = {};
+			state.user = null;
+			state.loggedIn = false;
 			sessionStorage.clear()
+			router.push({name:'login'})
 		}
 	},
 	actions: {

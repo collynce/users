@@ -45,7 +45,7 @@ export default new Vuex.Store({
 	actions: {
 		getUsers({commit}, payload) {
 			axios
-				.get("/users.json")
+				.get("/users/users.json")
 				.then(({data}) => {
 					commit("set_users", data);
 				})
